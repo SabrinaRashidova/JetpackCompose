@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "JetpackPractise"
 include(":app")
- 
+include(":lists")
