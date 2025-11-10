@@ -1,4 +1,4 @@
-package com.sabrina.jetpackpractise
+package com.sabrina.jetpackpractise.navigation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,6 +36,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
+import com.sabrina.jetpackpractise.R
 
 @Composable
 fun ProfilePage(navController: NavController) {
