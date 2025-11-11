@@ -1,6 +1,6 @@
 package com.sabrina.jetpackpractise
 
-import android.widget.Space
+import android.media.Image
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -14,40 +14,122 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlin.math.round
 
 @Composable
 fun IgProfileScreen() {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(top = 6.dp)) {
+    var selectedTabIndex by remember {
+        mutableStateOf(0)
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 6.dp)
+    ) {
         TopBar(name = "sabrina_r_official ")
         Spacer(modifier = Modifier.height(8.dp))
         ProfileSection()
         Spacer(modifier = Modifier.height(25.dp))
         ButtonSection(modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(25.dp))
+        HighlightSection(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp),
+            highlights = listOf(
+                ImageWithText(
+                    image = painterResource(R.drawable.youtube),
+                    text = "YouTube"
+                ),
+                ImageWithText(
+                    image = painterResource(R.drawable.qa),
+                    text = "Q&A"
+                ),
+                ImageWithText(
+                    image = painterResource(R.drawable.discord),
+                    text = "Discord"
+                ),
+                ImageWithText(
+                    image = painterResource(R.drawable.telegram),
+                    text = "Telegram"
+                )
+            )
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        PostTabView(
+            imageWithTexts = listOf(
+                ImageWithText(
+                    image = painterResource(R.drawable.ic_grid),
+                    text = "Posts"
+                ),
+                ImageWithText(
+                    image = painterResource(R.drawable.ic_reels),
+                    text = "Reels"
+                ),
+                ImageWithText(
+                    image = painterResource(R.drawable.ic_igtv),
+                    text = "IGTV"
+                ),
+                ImageWithText(
+                    image = painterResource(R.drawable.profile),
+                    text = "Profile "
+                ),
+            )
+        ) {
+            selectedTabIndex = it
+        }
+        when(selectedTabIndex){
+            0 -> PostSection(
+                posts = listOf(
+                    painterResource(R.drawable.kmm),
+                    painterResource(R.drawable.intermediate_dev),
+                    painterResource(R.drawable.master_logical_thinking),
+                    painterResource(R.drawable.bad_habits),
+                    painterResource(R.drawable.multiple_languages),
+                    painterResource(R.drawable.learn_coding_fast),
+                    painterResource(R.drawable.kmm),
+                    painterResource(R.drawable.intermediate_dev),
+                    painterResource(R.drawable.master_logical_thinking),
+                    painterResource(R.drawable.bad_habits),
+                    painterResource(R.drawable.multiple_languages),
+                    painterResource(R.drawable.learn_coding_fast),
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }
 
@@ -90,7 +172,7 @@ fun TopBar(
 
 @Composable
 fun ProfileSection(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Row(
@@ -99,19 +181,22 @@ fun ProfileSection(
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
         ) {
-            RoundImage(image = painterResource(R.drawable.judy),
+            RoundImage(
+                image = painterResource(R.drawable.judy),
                 modifier = Modifier
                     .size(100.dp)
-                    .weight(3f))
+                    .weight(3f)
+            )
             Spacer(modifier = Modifier.height(16.dp))
-            StatSection(modifier = Modifier.weight(7f)
+            StatSection(
+                modifier = Modifier.weight(7f)
             )
         }
         ProfileDescription(
             displayName = "Sabrina's Blog",
             description = " \uD83C\uDF3C You deserve a little sunshine.\n Handpicked flowers delivered to your door. \uD83D\uDC90\n Order yours",
             url = "https://flowers.com/sabrinas'flowers",
-            followedBy = listOf("Us flowers","Fresh Flowers"),
+            followedBy = listOf("Us flowers", "Fresh Flowers"),
             otherCount = 17
         )
     }
@@ -120,8 +205,8 @@ fun ProfileSection(
 @Composable
 fun RoundImage(
     image: Painter,
-    modifier: Modifier = Modifier
-){
+    modifier: Modifier = Modifier,
+) {
     Image(
         painter = image,
         contentDescription = null,
@@ -144,9 +229,9 @@ fun StatSection(modifier: Modifier = Modifier) {
         horizontalArrangement = Arrangement.SpaceAround,
         modifier = modifier
     ) {
-        ProfileStat("601","Posts")
-        ProfileStat("100k","Followers")
-        ProfileStat("72","Following")
+        ProfileStat("601", "Posts")
+        ProfileStat("100k", "Followers")
+        ProfileStat("72", "Following")
     }
 }
 
@@ -154,7 +239,7 @@ fun StatSection(modifier: Modifier = Modifier) {
 fun ProfileStat(
     numberText: String,
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -178,9 +263,9 @@ fun ProfileStat(
 fun ProfileDescription(
     displayName: String,
     description: String,
-     url: String,
+    url: String,
     followedBy: List<String>,
-    otherCount: Int
+    otherCount: Int,
 ) {
     val letterSpacing = 0.5.sp
     val lineHeight = 20.sp
@@ -206,7 +291,7 @@ fun ProfileDescription(
             letterSpacing = letterSpacing,
             lineHeight = lineHeight
         )
-        if (followedBy.isNotEmpty()){
+        if (followedBy.isNotEmpty()) {
             Text(
                 text = buildAnnotatedString {
                     val boldStyle = SpanStyle(
@@ -214,13 +299,15 @@ fun ProfileDescription(
                         fontWeight = FontWeight.Bold
                     )
                     append("Followed by ")
-                    followedBy.forEachIndexed { index, name->
+                    followedBy.forEachIndexed { index, name ->
                         pushStyle(boldStyle)
                         append(name)
                         pop()
-                        if (index < followedBy.size - 1){  append(", ")}
+                        if (index < followedBy.size - 1) {
+                            append(", ")
+                        }
                     }
-                    if (otherCount > 2){
+                    if (otherCount > 2) {
                         append(" and ")
                         pushStyle(boldStyle)
                         append("$otherCount others")
@@ -235,14 +322,14 @@ fun ProfileDescription(
 
 @Composable
 fun ButtonSection(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val minWidth = 95.dp
     val height = 30.dp
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = modifier
-    ){
+    ) {
         ActionButton(
             text = "Following",
             icon = Icons.Default.KeyboardArrowDown,
@@ -275,7 +362,7 @@ fun ButtonSection(
 fun ActionButton(
     modifier: Modifier = Modifier,
     text: String? = null,
-    icon: ImageVector? = null
+    icon: ImageVector? = null,
 ) {
     Row(
         horizontalArrangement = Arrangement.Center,
@@ -284,22 +371,116 @@ fun ActionButton(
             .border(
                 width = 1.dp,
                 color = Color.LightGray,
-                shape = RoundedCornerShape(5.dp )
+                shape = RoundedCornerShape(5.dp)
             )
             .padding(6.dp)
     ) {
-        if (text != null){
+        if (text != null) {
             Text(
                 text = text,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 14.sp
             )
         }
-        if (icon != null){
+        if (icon != null) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
                 tint = Color.Black
+            )
+        }
+    }
+}
+
+@Composable
+fun HighlightSection(
+    modifier: Modifier = Modifier,
+    highlights: List<ImageWithText>,
+) {
+    LazyRow(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        items(highlights.size) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .padding(end = 15.dp)
+            ) {
+                RoundImage(
+                    image = highlights[it].image,
+                    modifier = Modifier.size(70.dp)
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = highlights[it].text,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+}
+
+
+@Composable
+fun PostTabView(
+    modifier: Modifier = Modifier,
+    imageWithTexts: List<ImageWithText>,
+    onTabSelected: (selectedIndex: Int) -> Unit,
+) {
+    var selectedTabIndex by remember {
+        mutableStateOf(0)
+    }
+    val inactiveColor = Color(0xFF777777)
+    TabRow(
+        selectedTabIndex = selectedTabIndex,
+        modifier = modifier,
+        contentColor = Color.Black
+    ) {
+        imageWithTexts.forEachIndexed { index, item ->
+            Tab(selected = selectedTabIndex == index,
+                selectedContentColor = Color.Black,
+                unselectedContentColor = inactiveColor,
+                onClick = {
+                    selectedTabIndex = index
+                    onTabSelected(index)
+                }) {
+                Icon(
+                    painter = item.image,
+                    contentDescription = item.text,
+                    tint = if (selectedTabIndex == index) Color.Black else inactiveColor,
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .size(20.dp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun PostSection(
+    posts: List<Painter>,
+    modifier: Modifier = Modifier
+ ) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(3),
+        modifier = modifier
+            .scale(1.01f)
+    ) {
+        items(posts.size){
+            Image(
+                painter = posts[it],
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .aspectRatio(1f)
+                    .border(
+                        width = 1.dp,
+                        color = Color.White
+                    )
             )
         }
     }
