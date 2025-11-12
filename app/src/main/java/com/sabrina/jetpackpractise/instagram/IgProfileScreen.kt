@@ -72,19 +72,19 @@ fun IgProfileScreen() {
                 .padding(horizontal = 20.dp),
             highlights = listOf(
                 ImageWithText(
-                    image = painterResource(R.drawable.youtube),
+                    image = painterResource(R.drawable.ic_youtube),
                     text = "YouTube"
                 ),
                 ImageWithText(
-                    image = painterResource(R.drawable.qa),
-                    text = "Q&A"
+                    image = painterResource(R.drawable.pinterest),
+                    text = "Pinterest"
                 ),
                 ImageWithText(
-                    image = painterResource(R.drawable.discord),
+                    image = painterResource(R.drawable.ic_discord),
                     text = "Discord"
                 ),
                 ImageWithText(
-                    image = painterResource(R.drawable.telegram),
+                    image = painterResource(R.drawable.ic_tg),
                     text = "Telegram"
                 )
             )
@@ -115,18 +115,15 @@ fun IgProfileScreen() {
         when(selectedTabIndex){
             0 -> PostSection(
                 posts = listOf(
-                    painterResource(R.drawable.kmm),
-                    painterResource(R.drawable.intermediate_dev),
-                    painterResource(R.drawable.master_logical_thinking),
-                    painterResource(R.drawable.bad_habits),
-                    painterResource(R.drawable.multiple_languages),
-                    painterResource(R.drawable.learn_coding_fast),
-                    painterResource(R.drawable.kmm),
-                    painterResource(R.drawable.intermediate_dev),
-                    painterResource(R.drawable.master_logical_thinking),
-                    painterResource(R.drawable.bad_habits),
-                    painterResource(R.drawable.multiple_languages),
-                    painterResource(R.drawable.learn_coding_fast),
+                    painterResource(R.drawable.flower1),
+                    painterResource(R.drawable.flower3),
+                    painterResource(R.drawable.flower5),
+                    painterResource(R.drawable.flower6),
+                    painterResource(R.drawable.flower1),
+                    painterResource(R.drawable.flower3),
+                    painterResource(R.drawable.flower5),
+                    painterResource(R.drawable.flower6),
+
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
@@ -230,9 +227,9 @@ fun StatSection(modifier: Modifier = Modifier) {
         horizontalArrangement = Arrangement.SpaceAround,
         modifier = modifier
     ) {
-        ProfileStat("601", "Posts")
+        ProfileStat("204", "Posts")
         ProfileStat("100k", "Followers")
-        ProfileStat("72", "Following")
+        ProfileStat("64", "Following")
     }
 }
 
