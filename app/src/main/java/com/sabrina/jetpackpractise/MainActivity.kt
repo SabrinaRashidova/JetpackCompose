@@ -15,35 +15,14 @@ import com.sabrina.jetpackpractise.bottomnavigation.BottomNavItem
 import com.sabrina.jetpackpractise.bottomnavigation.BottomNavigationBar
 import com.sabrina.jetpackpractise.bottomnavigation.Navigation
 import com.sabrina.jetpackpractise.instagram.IgProfileScreen
+import com.sabrina.jetpackpractise.scrolleffect.ScrollEffect
 import com.sabrina.jetpackpractise.ui.theme.ComposeArticleTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
-                val navController = rememberNavController()
-
-                Scaffold(
-                    bottomBar = {
-                        BottomNavigationBar(
-                            items = listOf(
-                                BottomNavItem("Home", "home", Icons.Default.Home),
-                                BottomNavItem("Chat", "chat", Icons.Default.Notifications),
-                                BottomNavItem("Settings", "settings", Icons.Default.Settings)
-                            ),
-                            navController = navController,
-                            onItemClick = { item ->
-                                navController.navigate(item.route)
-                            }
-                        )
-                    }
-                ) { padding ->
-                    Navigation(
-                        navController = navController,
-                        modifier = Modifier.padding(padding)
-                    )
-                }
+            ScrollEffect()
         }
     }
 }
