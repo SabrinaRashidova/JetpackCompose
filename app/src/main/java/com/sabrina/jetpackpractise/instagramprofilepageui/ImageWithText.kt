@@ -1,4 +1,4 @@
-package com.sabrina.jetpackpractise.instagram
+package com.sabrina.jetpackpractise.instagramprofilepageui
 
 import androidx.compose.ui.graphics.painter.Painter
 
