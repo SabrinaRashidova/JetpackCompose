@@ -64,4 +64,5 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("com.google.accompanist:accompanist-permissions:0.37.3")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
 }
