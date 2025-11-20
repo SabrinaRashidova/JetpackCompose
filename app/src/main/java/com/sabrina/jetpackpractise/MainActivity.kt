@@ -3,13 +3,14 @@ package com.sabrina.jetpackpractise
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.sabrina.jetpackpractise.lazygrid.LazyGrid
 import com.sabrina.jetpackpractise.navigationdrawer.SetUPNavDrawer
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SetUPNavDrawer()
+            LazyGrid()
         }
     }
 }
